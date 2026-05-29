@@ -96,17 +96,35 @@ def mutate_int(v: str) -> str:
         return v
 
 
+UPSTREAM = os.path.join(os.path.dirname(os.path.abspath(__file__)), "upstream")
+
+
 def specs():
-    """(slug, title, source) from the native fixtures (canonical, compiling)."""
+    """(slug, title, source, provenance) from synthetic fixtures + official
+    zerolang examples. The upstream examples are richer (types, enums, choices,
+    match, generics, owned) and only need to `zero check` — graph edits don't
+    require the program to run."""
     for slug, title, diff, tags, prompt, src, extra in native.specs():
-        yield slug, title, src
+        yield slug, title, src, {
+            "source": "generated", "source_path": "tools/generators/gen_zero_native.py",
+        }
+    if os.path.isdir(UPSTREAM):
+        for fn in sorted(os.listdir(UPSTREAM)):
+            if not fn.endswith(".0"):
+                continue
+            name = fn[:-2]
+            with open(os.path.join(UPSTREAM, fn), encoding="utf-8") as fh:
+                src = fh.read()
+            yield f"ex-{name}", f"example {name}", src, {
+                "source": "zerolang", "source_path": f"examples/{fn}",
+            }
 
 
 def main():
     rows = []
     failures = 0
     seen_ids: set[str] = set()
-    for slug, title, src in specs():
+    for slug, title, src, prov in specs():
         dump = graph_dump(src)
         if not dump:
             continue
@@ -166,7 +184,7 @@ def main():
                 },
                 "environment": {"type": "local", "requires_network": False, "requires_gpu": False},
                 "provenance": {
-                    "source": "generated", "source_path": "tools/generators/gen_zero_graph_edit.py",
+                    "source": prov["source"], "source_path": prov["source_path"],
                     "license": "MIT", "zero_version": ZERO_VERSION,
                 },
                 "_fixture": {"target_source": target},
