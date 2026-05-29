@@ -26,16 +26,29 @@ zerolang 0.2.0, so it earns mostly format/pattern credit and rarely compiles —
 exactly the headroom RL targets (oracle = 1.0, verified). It also confirms the
 grader discriminates on the platform, not just locally.
 
-## Laguna XS.2 baseline — pending credentials
+## Laguna XS.2 baseline — DONE ✅ (target model, online)
 
-Running the target `poolside/Laguna-XS.2` (33B) needs a Prime inference endpoint
-+ `PRIME_API_KEY` (unset here). Once set, swap the model:
+Ran `poolside/laguna-xs.2` via Prime Inference (`-p prime`, $0) on the val split
+of every Zero family; all uploaded to the platform:
 
+| family | val tasks × rollouts | avg_score | eval |
+|---|---|---:|---|
+| zero_native | 5 × 3 | 0.060 | https://app.primeintellect.ai/dashboard/evaluations/rsfvkwpxk8qwufwz70zs5ayv |
+| zero_repair | 5 × 3 | 0.135 | https://app.primeintellect.ai/dashboard/evaluations/cnrpib730ywqw7cmdfti62lc |
+| zero_package_edit | 1 × 3 | 0.000 | https://app.primeintellect.ai/dashboard/evaluations/yafd7v5z9pgvtqf8xzpeyxc8 |
+
+Command (per family):
 ```
 prime eval run pandelis/zero-verifiers-env -p prime -m poolside/laguna-xs.2 \
-  -n 5 -a '{"family":"zero_native","split":"val"}' -s
+  -n 5 -a '{"family":"<family>","split":"val"}' -s
 ```
-or use the provided `prime/eval.zero.toml`.
+
+Read: the base Laguna XS.2 is weak at zerolang 0.2.0 — it earns mostly
+format/error-reduction credit, never fully compiling+passing. `zero_repair`
+(0.135) > `zero_native` (0.060) > `zero_package_edit` (0.000), i.e. fixing a
+nearly-correct file is easiest and restoring a stubbed function in a multi-file
+package is hardest. All oracles score 1.0, so every family has large, real RL
+headroom. These are the frozen v0.1 pre-RL baselines to beat.
 
 ## Local proxy baseline (grader-side)
 
