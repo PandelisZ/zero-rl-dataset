@@ -1,0 +1,19 @@
+{
+  "families": {
+    "zero_native": 58,
+    "zero_repair": 58,
+    "zero_package_edit": 10
+  },
+  "splits": {
+    "train": 104,
+    "val": 11,
+    "test": 11
+  },
+  "difficulty": {
+    "1": 23,
+    "2": 53,
+    "3": 45,
+    "4": 5
+  },
+  "total": 126
+}

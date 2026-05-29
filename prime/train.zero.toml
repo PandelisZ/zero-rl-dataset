@@ -1,0 +1,39 @@
+# First RL run: Zero-native + repair tasks only.
+# Run: prime rl run prime/train.zero.toml
+model = "poolside/Laguna-XS.2"
+
+[run]
+name = "laguna-xs2-zero-rl-pilot"
+seed = 42
+
+[[env]]
+id = "zero_native"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.6
+
+[[env]]
+id = "zero_repair"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.4
+
+[training]
+algorithm = "grpo"
+steps = 200
+batch_size = 128
+rollouts_per_example = 8
+max_prompt_tokens = 8192
+max_completion_tokens = 4096
+
+[eval]
+every_steps = 25
+split = "val"
+rollouts_per_example = 4
+
+[checkpoint]
+every_steps = 25
+keep_last = 5
+
+[logging]
+wandb_project = "zero-rl"

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zerolang.example/cir.schema.json",
+  "title": "Zero RL Canonical Intermediate Representation (CIR) task",
+  "type": "object",
+  "required": ["id", "title", "family", "split", "difficulty", "prompt", "expected", "grader", "environment", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+/[a-z0-9._-]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "family": { "enum": ["zero_native", "zero_repair", "zero_package_edit", "harbor_env"] },
+    "split": { "enum": ["train", "val", "test"] },
+    "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "prompt": { "type": "string", "minLength": 1 },
+    "system_prompt": { "type": "string" },
+    "starter_files": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stdout": { "type": "string" },
+        "files": { "type": "object", "additionalProperties": { "type": "string" } },
+        "source_patterns": { "type": "array", "items": { "type": "string" } },
+        "forbidden_patterns": { "type": "array", "items": { "type": "string" } },
+        "tests_pass": { "type": "boolean" }
+      }
+    },
+    "repair_objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "initial_expected_errors": { "type": "array", "items": { "type": "string" } },
+        "target": { "type": "string" }
+      }
+    },
+    "grader": {
+      "type": "object",
+      "required": ["type", "reward_version"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["zero_compiler_runtime", "zero_repair", "zero_package_edit", "harbor_reward"] },
+        "entry_file": { "type": "string" },
+        "timeout_sec": { "type": "integer", "minimum": 1, "maximum": 600 },
+        "reward_version": { "type": "string" },
+        "hidden": { "type": "boolean" },
+        "check": { "type": "boolean" },
+        "run": { "type": "boolean" },
+        "test": { "type": "boolean" },
+        "stdout_exact": { "type": "boolean" },
+        "patterns": { "type": "boolean" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["local", "docker", "harbor"] },
+        "image": { "type": "string" },
+        "requires_network": { "type": "boolean" },
+        "requires_gpu": { "type": "boolean" },
+        "requires_secrets": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "license"],
+      "additionalProperties": false,
+      "properties": {
+        "source": { "enum": ["zerolang", "zerolang-examples", "terminalbench", "harbor", "generated"] },
+        "source_path": { "type": "string" },
+        "source_commit": { "type": "string" },
+        "license": { "type": "string" },
+        "content_hash": { "type": "string" },
+        "zero_version": { "type": "string" }
+      }
+    }
+  }
+}

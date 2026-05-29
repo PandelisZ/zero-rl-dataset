@@ -1,0 +1,28 @@
+[project]
+name = "zero-verifiers-env"
+version = "0.1.0"
+description = "Zero (zerolang) RL environment for Prime Intellect verifiers: native code-gen, repair, and package-edit tasks graded by the native zero toolchain."
+requires-python = ">=3.10"
+dependencies = [
+    "verifiers",
+    "datasets",
+]
+
+[project.entry-points."verifiers.environments"]
+zero_native = "zero_verifiers_env:load_environment"
+zero_repair = "zero_verifiers_env:load_environment"
+zero_package_edit = "zero_verifiers_env:load_environment"
+harbor_env = "zero_verifiers_env:load_environment"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["zero_verifiers_env"]
+
+# NOTE: this environment shells out to the `zero` binary (zerolang 0.2.0) at
+# grade time. The training/eval host must have `zero` on PATH
+# (curl -fsSL https://zerolang.ai/install.sh | bash). For standalone Hub upload,
+# vendor tools/graders/{zero_grader,zero_runner,zero_reward}.py into this package
+# directory (they are imported via a repo-relative fallback during local runs).

@@ -1,0 +1,23 @@
+# Baseline eval on Zero-native tasks before RL.
+# Run: prime eval run prime/eval.zero.toml
+# NOTE: keys follow the brief's template and may need adjustment to Prime's
+# current hosted-training schema; validate against `prime --help` / docs.
+model = "poolside/Laguna-XS.2"
+
+[run]
+name = "laguna-xs2-zero-native-baseline"
+seed = 42
+
+[[env]]
+id = "zero_native"
+package = "../envs/zero_verifiers_env"
+split = "val"
+max_examples = 11
+
+[eval]
+rollouts_per_example = 4
+temperature = 0.6
+max_tokens = 4096
+
+[logging]
+wandb_project = "zero-rl"

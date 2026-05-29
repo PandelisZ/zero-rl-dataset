@@ -1,0 +1,25 @@
+{
+  "sources": {
+    "zerolang-examples": {
+      "path": "../zerolang-examples",
+      "commit": "cb9b454f3b4df21c2f8cd8ff09ee7fcb69007d4f",
+      "role": "substrate for zero_package_edit; reused idioms for generators",
+      "license": "MIT"
+    },
+    "zerolang_toolchain": {
+      "binary": "zero",
+      "version": "0.2.0",
+      "install": "https://zerolang.ai/install.sh"
+    }
+  },
+  "classification": {
+    "convert_to_zero_native": "synthetic templates (gen_zero_native.py)",
+    "convert_to_zero_repair": "breakages of native fixtures (gen_zero_repair.py)",
+    "convert_to_zero_package_edit": "10 zerolang-examples projects (gen_zero_package_edit.py)",
+    "keep_as_harbor_env": "deferred (needs Harbor/TerminalBench + containers)",
+    "exclude_for_now": [
+      "terminalbench: not fetched",
+      "harbor: not fetched"
+    ]
+  }
+}

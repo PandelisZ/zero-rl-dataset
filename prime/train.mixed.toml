@@ -1,0 +1,52 @@
+# Later mixed curriculum: native + repair + package-edit (+ harbor when populated).
+# Run: prime rl run prime/train.mixed.toml
+model = "poolside/Laguna-XS.2"
+
+[run]
+name = "laguna-xs2-zero-mixed-rl"
+seed = 42
+
+[[env]]
+id = "zero_native"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.45
+
+[[env]]
+id = "zero_repair"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.35
+
+[[env]]
+id = "zero_package_edit"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.20
+
+# Enable once tasks/harbor is populated (see env tasks/harbor/README.md):
+# [[env]]
+# id = "harbor_env"
+# package = "../envs/zero_verifiers_env"
+# split = "train"
+# weight = 0.20
+
+[training]
+algorithm = "grpo"
+steps = 500
+batch_size = 256
+rollouts_per_example = 8
+max_prompt_tokens = 16384
+max_completion_tokens = 8192
+
+[eval]
+every_steps = 50
+split = "val"
+rollouts_per_example = 4
+
+[checkpoint]
+every_steps = 50
+keep_last = 5
+
+[logging]
+wandb_project = "zero-rl"

@@ -1,0 +1,891 @@
+{
+  "total": 126,
+  "oracle_mean": 1.0,
+  "baseline_mean": 0.4161,
+  "oracle_failures": 0,
+  "trivial_tasks": 0,
+  "results": [
+    {
+      "id": "zero_native/print-compiled-and-run",
+      "family": "zero_native",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/factorial-10",
+      "family": "zero_native",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/fib-seq-8",
+      "family": "zero_native",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/is-prime-2",
+      "family": "zero_native",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/collatz-6",
+      "family": "zero_native",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_repair/print-compiled-and-run--drop_raises",
+      "family": "zero_repair",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/factorial-10--unbound_call",
+      "family": "zero_repair",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-seq-8--drop_raises",
+      "family": "zero_repair",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/is-prime-2--unbound_call",
+      "family": "zero_repair",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/collatz-6--drop_check",
+      "family": "zero_repair",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_package_edit/zwc-restore-is_space",
+      "family": "zero_package_edit",
+      "split": "test",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_native/print-hello",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/print-ready",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-add-40-2",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-sub-100-58",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-mul-6-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-div-100-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-mod-100-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-add-12-12",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-add-255-255",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/arith-mul-9-9",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/factorial-5",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/factorial-6",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/factorial-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/fib-nth-10",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/fib-nth-15",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/fib-nth-20",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/fib-nth-25",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/fib-seq-11",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/gcd-48-36",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/gcd-1071-462",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/gcd-17-5",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/gcd-100-75",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/sum-to-10",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/sum-to-50",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/sum-to-100",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/sum-to-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/power-2-10",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/power-3-4",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/power-5-3",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/power-7-2",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/is-prime-17",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/is-prime-97",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/is-prime-100",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/count-down-3",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/count-down-5",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/count-down-10",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/mult-row-3",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/mult-row-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/mult-row-9",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/digit-sum-12345",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/digit-sum-9999",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/digit-sum-808",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/collatz-7",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/fizzbuzz-15",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/fizzbuzz-20",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/triangle-3",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/triangle-5",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/even-count-10",
+      "family": "zero_native",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_repair/print-hello--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/print-ready--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-add-40-2--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-sub-100-58--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-mul-6-7--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-div-100-7--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-mod-100-7--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-add-12-12--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-add-255-255--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/arith-mul-9-9--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/factorial-5--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/factorial-6--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/factorial-7--wrong_return_type",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-nth-10--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-nth-15--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-nth-20--wrong_return_type",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-nth-25--unbound_call",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-seq-11--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/gcd-48-36--unbound_call",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/gcd-1071-462--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/gcd-17-5--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/gcd-100-75--wrong_return_type",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/sum-to-10--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/sum-to-50--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/sum-to-100--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/sum-to-7--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/power-2-10--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/power-3-4--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/power-5-3--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/power-7-2--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/is-prime-17--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/is-prime-97--unbound_call",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/is-prime-100--unbound_call",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/count-down-3--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/count-down-5--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/count-down-10--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/mult-row-3--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/mult-row-7--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/mult-row-9--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/digit-sum-12345--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/digit-sum-9999--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/digit-sum-808--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/collatz-7--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fizzbuzz-15--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fizzbuzz-20--drop_check",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/triangle-3--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/triangle-5--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/even-count-10--drop_raises",
+      "family": "zero_repair",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_package_edit/zgrep-restore-byte_eq",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/zcalc-restore-apply_op",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/zsort-restore-cmp_u32",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/zcut-restore-at_least_one",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/ztr-restore-rot13_byte",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/zbase-restore-pow_u32",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/zfactor-restore-is_prime",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_package_edit/zstats-restore-min2",
+      "family": "zero_package_edit",
+      "split": "train",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    },
+    {
+      "id": "zero_native/print-RL-ready",
+      "family": "zero_native",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/fib-seq-13",
+      "family": "zero_native",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/is-prime-18",
+      "family": "zero_native",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.65
+    },
+    {
+      "id": "zero_native/collatz-27",
+      "family": "zero_native",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_native/even-count-20",
+      "family": "zero_native",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.675
+    },
+    {
+      "id": "zero_repair/print-RL-ready--drop_raises",
+      "family": "zero_repair",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/fib-seq-13--drop_raises",
+      "family": "zero_repair",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/is-prime-18--drop_check",
+      "family": "zero_repair",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/collatz-27--drop_raises",
+      "family": "zero_repair",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_repair/even-count-20--drop_check",
+      "family": "zero_repair",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.15
+    },
+    {
+      "id": "zero_package_edit/zuniq-restore-is_dup_count",
+      "family": "zero_package_edit",
+      "split": "val",
+      "oracle_reward": 1.0,
+      "baseline_reward": 0.5
+    }
+  ]
+}
