@@ -38,9 +38,15 @@ def to_dataset_records(rows: list[dict]) -> list[dict]:
     records = []
     for r in rows:
         info = {k: v for k, v in r.items() if k != "_fixture"}
+        # graph-edit tasks carry the target program as the answer; others are
+        # graded by execution, not string match.
+        answer = ""
+        exp = r.get("expected") or {}
+        if isinstance(exp, dict) and isinstance(exp.get("target_source"), str):
+            answer = exp["target_source"]
         records.append({
             "question": r["prompt"],  # SingleTurnEnv combines this with system_prompt
-            "answer": "",  # graded by execution, not string match
+            "answer": answer,
             "info": info,
             "task": r["family"],
         })

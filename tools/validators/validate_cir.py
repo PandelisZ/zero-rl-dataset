@@ -14,9 +14,9 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-FAMILIES = {"zero_native", "zero_repair", "zero_package_edit", "harbor_env"}
+FAMILIES = {"zero_native", "zero_repair", "zero_package_edit", "zero_graph_edit", "harbor_env"}
 SPLITS = {"train", "val", "test"}
-GRADERS = {"zero_compiler_runtime", "zero_repair", "zero_package_edit", "harbor_reward"}
+GRADERS = {"zero_compiler_runtime", "zero_repair", "zero_package_edit", "zero_graph_edit", "harbor_reward"}
 REQUIRED = ["id", "title", "family", "split", "difficulty", "prompt", "expected", "grader", "environment", "provenance"]
 
 

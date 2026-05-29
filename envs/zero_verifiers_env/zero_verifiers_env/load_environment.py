@@ -93,8 +93,15 @@ def load_environment(
     if family == "harbor_env":
         return _load_harbor(split=split, **kwargs)
 
+    if family == "zero_graph_edit":
+        return _load_graph_edit(split=split, dataset_root=dataset_root,
+                                max_examples=max_examples, **kwargs)
+
     if family not in ZERO_FAMILIES:
-        raise ValueError(f"unknown family {family!r}; expected one of {ZERO_FAMILIES | {'harbor_env'}}")
+        raise ValueError(
+            f"unknown family {family!r}; expected one of "
+            f"{ZERO_FAMILIES | {'zero_graph_edit', 'harbor_env'}}"
+        )
 
     if harness in ("roder-zero", "zero-roder"):
         return _load_roder_zero(family=family, split=split, dataset_root=dataset_root,
@@ -126,6 +133,30 @@ def load_environment(
         dataset=dataset,
         system_prompt=SYSTEM_PROMPT,
         rubric=rubric,
+        **kwargs,
+    )
+
+
+def _load_graph_edit(split: str, dataset_root: str | None, max_examples: int | None, **kwargs):
+    """Checked ProgramGraph-edit tasks: ToolEnv with the zero-coder tools and a
+    rubric that rewards the graph-patch action (not text editing)."""
+    import verifiers as vf
+    from datasets import Dataset
+
+    from .zero_graph_rubric import graph_edit_rubric
+    from .zero_tools import ZERO_CODER_TOOLS
+
+    records = taskset.load_family("zero_graph_edit", split, dataset_root)
+    if max_examples:
+        records = records[:max_examples]
+    dataset = Dataset.from_list(records)
+    max_turns = int(kwargs.pop("max_turns", 8))
+    return vf.ToolEnv(
+        dataset=dataset,
+        tools=ZERO_CODER_TOOLS,
+        system_prompt=ZERO_CODER_SYSTEM_PROMPT,
+        rubric=graph_edit_rubric(),
+        max_turns=max_turns,
         **kwargs,
     )
 

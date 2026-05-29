@@ -43,7 +43,14 @@ def main():
     results = []
     oracle_fail = []
     trivial = []
+    graph_edit_skipped = 0
     for r in rows:
+        # zero_graph_edit is graded by the env rubric over a tool trajectory, not
+        # the deterministic file grader; its oracle (gold --op reaches a compiling
+        # target) is verified at generation time. Skip here.
+        if r["family"] == "zero_graph_edit":
+            graph_edit_skipped += 1
+            continue
         oracle = zero_grader.grade(r, {"files": r.get("_fixture", {})})
         baseline = zero_grader.grade(r, baseline_submission(r))
         results.append({
@@ -68,6 +75,7 @@ def main():
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(summary, fh, indent=2)
 
+    print(f"graph_edit skipped   : {graph_edit_skipped} (rubric-graded; verified at generation)")
     print(f"oracle mean reward   : {summary['oracle_mean']}  (target >= {ORACLE_MIN})")
     print(f"baseline mean reward : {summary['baseline_mean']}  (target <= {BASELINE_MAX})")
     print(f"oracle failures      : {len(oracle_fail)}")

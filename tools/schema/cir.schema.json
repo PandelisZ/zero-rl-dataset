@@ -8,7 +8,7 @@
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_]+/[a-z0-9._-]+$" },
     "title": { "type": "string", "minLength": 1 },
-    "family": { "enum": ["zero_native", "zero_repair", "zero_package_edit", "harbor_env"] },
+    "family": { "enum": ["zero_native", "zero_repair", "zero_package_edit", "zero_graph_edit", "harbor_env"] },
     "split": { "enum": ["train", "val", "test"] },
     "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
     "tags": { "type": "array", "items": { "type": "string" } },
@@ -26,7 +26,8 @@
         "files": { "type": "object", "additionalProperties": { "type": "string" } },
         "source_patterns": { "type": "array", "items": { "type": "string" } },
         "forbidden_patterns": { "type": "array", "items": { "type": "string" } },
-        "tests_pass": { "type": "boolean" }
+        "tests_pass": { "type": "boolean" },
+        "target_source": { "type": "string" }
       }
     },
     "repair_objective": {
@@ -37,12 +38,23 @@
         "target": { "type": "string" }
       }
     },
+    "graph_objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "graph_hash": { "type": "string" },
+        "node": { "type": "string" },
+        "field": { "type": "string" },
+        "expect": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    },
     "grader": {
       "type": "object",
       "required": ["type", "reward_version"],
       "additionalProperties": false,
       "properties": {
-        "type": { "enum": ["zero_compiler_runtime", "zero_repair", "zero_package_edit", "harbor_reward"] },
+        "type": { "enum": ["zero_compiler_runtime", "zero_repair", "zero_package_edit", "zero_graph_edit", "harbor_reward"] },
         "entry_file": { "type": "string" },
         "timeout_sec": { "type": "integer", "minimum": 1, "maximum": 600 },
         "reward_version": { "type": "string" },

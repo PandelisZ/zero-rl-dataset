@@ -17,6 +17,7 @@ FAMILY_GLOBS = {
     "zero_native": "datasets/zero_native/cases.{split}.jsonl",
     "zero_repair": "datasets/zero_repair/repair.{split}.jsonl",
     "zero_package_edit": "datasets/zero_package_edit/package.{split}.jsonl",
+    "zero_graph_edit": "datasets/zero_graph_edit/graph_edit.{split}.jsonl",
 }
 
 

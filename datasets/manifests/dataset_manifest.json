@@ -2,18 +2,19 @@
   "families": {
     "zero_native": 92,
     "zero_repair": 92,
-    "zero_package_edit": 47
+    "zero_package_edit": 47,
+    "zero_graph_edit": 180
   },
   "splits": {
-    "train": 187,
-    "val": 22,
-    "test": 22
+    "train": 331,
+    "val": 40,
+    "test": 40
   },
   "difficulty": {
     "1": 35,
     "2": 87,
-    "3": 104,
+    "3": 284,
     "4": 5
   },
-  "total": 231
+  "total": 411
 }

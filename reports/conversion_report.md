@@ -10,11 +10,18 @@ expanded from 10 by an agent team).
 | `zero_native` | 92 | Synthetic single-file templates (28 builders × params). Each fixture compiled + run through `zero`; **expected stdout captured from the real run** (never hand-written). |
 | `zero_repair` | 92 | Each verified native fixture broken by one transform (drop `raises`, drop `check`, wrong return type, misspelled call). Each before-state **verified to fail `zero check`**; diagnostics recorded. |
 | `zero_package_edit` | 47 | Tested functions across all 26 `zerolang-examples` projects (auto-discovered, up to 3/project) replaced with a type-correct but wrong stub → **compiles but fails `zero test`**. Oracle = original project. |
+| `zero_graph_edit` | 180 | **The graph-native family.** Back-translation: dump a fixture's ProgramGraph, mutate one literal node's value; the model must recover the target via a CHECKED `zero graph patch` (graphHash + node id + `expect`), NOT by rewriting text. Each task's gold `--op` is applied at generation to a compiling target. Graded by a tool-trajectory rubric (graph_patch_success 0.50 / target_match 0.20 / check 0.15 / surface_used 0.15). |
 | `harbor_env` | 0 | Deferred — needs Harbor/TerminalBench + container infra (see `envs/.../tasks/harbor/README.md`). |
 
-**Total: 231 tasks** (v0.1 was 126). Splits (deterministic, balanced ~80/10/10): train 187, val 22, test 22.
+**Total: 411 tasks** (v0.1 was 126). Splits (deterministic, balanced ~80/10/10): train 331, val 40, test 40.
 
-Difficulty distribution: 1→35, 2→87, 3→104, 4→5.
+Difficulty distribution: 1→35, 2→87, 3→284, 4→5.
+
+> **Graph-edit is the primary target.** It rewards the compiler-mediated
+> ProgramGraph edit surface (`zero graph dump` / `graph patch --op` ≈ Roder's
+> `zerolang_edit`), not `.0` text output. The source-emit families (native /
+> repair / package) remain as a baseline contrast. A gold trajectory scores 1.0
+> on the rubric (verified offline).
 
 ## Generation guarantees
 
