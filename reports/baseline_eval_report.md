@@ -1,6 +1,26 @@
-# Baseline Eval Report — Zero RL dataset v0.1
+# Baseline Eval Report — Zero RL dataset v0.2
 
-## Live Prime Intellect eval — DONE ✅
+## v0.2 (231 tasks) — Laguna XS.2 baselines, online ✅
+
+Env `pandelis/zero-verifiers-env` v0.3.1 (Integration Test PASSED). Laguna XS.2
+via Prime Inference on val:
+
+| family | avg_score | eval |
+|---|---:|---|
+| zero_native | 0.250 | https://app.primeintellect.ai/dashboard/evaluations/du9ungure4rxx9r7l5k809pp |
+| zero_repair | 0.147 | https://app.primeintellect.ai/dashboard/evaluations/ied8nxxkngcv74b9s50cwdw6 |
+| zero_package_edit | 0.000 | https://app.primeintellect.ai/dashboard/evaluations/nz28a26lsww76ot0j95x4ygt |
+
+Oracle mean reward **1.0** (0 failures), non-solution baseline **0.4285**, 0
+trivial tasks across all 231. The expanded native val (more easy/medium tasks)
+lifts the native baseline to 0.25 — a healthier learnable band than v0.1's 0.06.
+
+Smoke RL run launched: `prime train prime/train.smoke.toml` →
+https://app.primeintellect.ai/dashboard/training/cun4sdqniwiqr5e5lps61nur
+
+---
+
+## v0.1 — Live Prime Intellect eval — DONE ✅
 
 The environment is deployed and proven online on Prime Intellect:
 

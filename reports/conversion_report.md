@@ -1,20 +1,20 @@
-# Conversion Report — Zero RL dataset v0.1
+# Conversion Report — Zero RL dataset v0.2
 
-Generated against `zero 0.2.0`. Substrate commit (zerolang-examples):
-`cb9b454f3b4df21c2f8cd8ff09ee7fcb69007d4f`.
+Generated against `zero 0.2.0`. Substrate: `zerolang-examples` (now 26 projects,
+expanded from 10 by an agent team).
 
 ## Families produced
 
 | Family | Tasks | How |
 |---|---:|---|
-| `zero_native` | 58 | Synthetic single-file templates (17 builders × params). Each fixture compiled + run through `zero`; **expected stdout captured from the real run** (never hand-written). |
-| `zero_repair` | 58 | Each verified native fixture broken by one transform (drop `raises`, drop `check`, wrong return type, misspelled call). Each before-state **verified to fail `zero check`**; diagnostics recorded. |
-| `zero_package_edit` | 10 | One tested function in each of the 10 `zerolang-examples` projects replaced with a type-correct but wrong stub → **compiles but fails `zero test`**. Oracle = original project. |
+| `zero_native` | 92 | Synthetic single-file templates (28 builders × params). Each fixture compiled + run through `zero`; **expected stdout captured from the real run** (never hand-written). |
+| `zero_repair` | 92 | Each verified native fixture broken by one transform (drop `raises`, drop `check`, wrong return type, misspelled call). Each before-state **verified to fail `zero check`**; diagnostics recorded. |
+| `zero_package_edit` | 47 | Tested functions across all 26 `zerolang-examples` projects (auto-discovered, up to 3/project) replaced with a type-correct but wrong stub → **compiles but fails `zero test`**. Oracle = original project. |
 | `harbor_env` | 0 | Deferred — needs Harbor/TerminalBench + container infra (see `envs/.../tasks/harbor/README.md`). |
 
-**Total: 126 tasks.** Splits (deterministic, balanced ~80/10/10): train 104, val 11, test 11.
+**Total: 231 tasks** (v0.1 was 126). Splits (deterministic, balanced ~80/10/10): train 187, val 22, test 22.
 
-Difficulty distribution: 1→23, 2→53, 3→45, 4→5.
+Difficulty distribution: 1→35, 2→87, 3→104, 4→5.
 
 ## Generation guarantees
 

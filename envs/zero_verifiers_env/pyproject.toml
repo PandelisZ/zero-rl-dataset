@@ -1,7 +1,8 @@
 [project]
 name = "zero-verifiers-env"
-version = "0.2.0"
+version = "0.3.1"
 description = "Zero (zerolang) RL environment for Prime Intellect verifiers: native code-gen, repair, and package-edit tasks graded by the native zero toolchain."
+tags = ["zerolang", "code-editing", "code-repair", "rl", "train", "eval"]
 requires-python = ">=3.10"
 dependencies = [
     "verifiers",

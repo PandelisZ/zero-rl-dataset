@@ -15,15 +15,40 @@ import tempfile
 from dataclasses import dataclass
 
 
+_INSTALL_ATTEMPTED = False
+
+
 def zero_bin() -> str:
-    """Locate the `zero` binary (PATH, then the default install location)."""
+    """Locate the `zero` binary (PATH, then ~/.zero/bin), auto-installing once.
+
+    Prime's hosted env-servers are clean containers without `zero`, so on first
+    use we lazily install the toolchain via the official installer. Set
+    ZERO_NO_AUTOINSTALL=1 to disable.
+    """
     found = shutil.which("zero")
     if found:
         return found
     default = os.path.expanduser("~/.zero/bin/zero")
     if os.path.exists(default):
         return default
-    raise FileNotFoundError("`zero` not found on PATH or ~/.zero/bin. Run scripts/setup.sh.")
+
+    global _INSTALL_ATTEMPTED
+    if not _INSTALL_ATTEMPTED and os.environ.get("ZERO_NO_AUTOINSTALL") != "1":
+        _INSTALL_ATTEMPTED = True
+        try:
+            subprocess.run(
+                "curl -fsSL https://zerolang.ai/install.sh | bash",
+                shell=True, capture_output=True, text=True, timeout=300,
+            )
+        except Exception:
+            pass
+        if os.path.exists(default):
+            return default
+
+    raise FileNotFoundError(
+        "`zero` not found on PATH or ~/.zero/bin and auto-install failed. "
+        "Install with: curl -fsSL https://zerolang.ai/install.sh | bash"
+    )
 
 
 def zero_version() -> str:

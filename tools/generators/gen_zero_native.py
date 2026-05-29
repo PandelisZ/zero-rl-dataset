@@ -305,6 +305,223 @@ pub fn main(world: World) -> Void raises {{
 """
 
 
+def b_isqrt(n: int) -> str:
+    return common.FMT_U32 + f"""
+fn isqrt(n: u32) -> u32 {{
+    var r: u32 = 0
+    while (r + 1) * (r + 1) <= n {{
+        r = r + 1
+    }}
+    return r
+}}
+
+pub fn main(world: World) -> Void raises {{
+    var buf: [10]u8 = [0; 10]
+    check world.out.write(fmt_u32(buf, isqrt({n})))
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_to_binary(n: int) -> str:
+    return f"""
+pub fn main(world: World) -> Void raises {{
+    var n: u32 = {n}
+    if n == 0 {{
+        check world.out.write("0\\n")
+        return
+    }}
+    var tmp: [32]u8 = [0; 32]
+    var cnt: usize = 0
+    while n > 0 {{
+        tmp[cnt] = 48 + ((n % 2) as u8)
+        n = n / 2
+        cnt = cnt + 1
+    }}
+    var out: [32]u8 = [0; 32]
+    var w: usize = 0
+    while w < cnt {{
+        out[w] = tmp[cnt - 1 - w]
+        w = w + 1
+    }}
+    check world.out.write(out[0..cnt])
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_popcount(n: int) -> str:
+    return common.FMT_U32 + f"""
+pub fn main(world: World) -> Void raises {{
+    var n: u32 = {n}
+    var c: u32 = 0
+    while n > 0 {{
+        c = c + (n % 2)
+        n = n / 2
+    }}
+    var buf: [10]u8 = [0; 10]
+    check world.out.write(fmt_u32(buf, c))
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_lcm(a: int, b: int) -> str:
+    return common.FMT_U32 + f"""
+fn gcd(a: u32, b: u32) -> u32 {{
+    var x: u32 = a
+    var y: u32 = b
+    while y > 0 {{
+        let t: u32 = x % y
+        x = y
+        y = t
+    }}
+    return x
+}}
+
+pub fn main(world: World) -> Void raises {{
+    let g: u32 = gcd({a}, {b})
+    let l: u32 = {a} / g * {b}
+    var buf: [10]u8 = [0; 10]
+    check world.out.write(fmt_u32(buf, l))
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_triangle_num(n: int) -> str:
+    return common.FMT_U32 + f"""
+pub fn main(world: World) -> Void raises {{
+    let n: u32 = {n}
+    let t: u32 = n * (n + 1) / 2
+    var buf: [10]u8 = [0; 10]
+    check world.out.write(fmt_u32(buf, t))
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_celsius_to_f(c: int) -> str:
+    return common.FMT_U32 + f"""
+pub fn main(world: World) -> Void raises {{
+    let c: u32 = {c}
+    let f: u32 = c * 9 / 5 + 32
+    var buf: [10]u8 = [0; 10]
+    check world.out.write(fmt_u32(buf, f))
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_hex(n: int) -> str:
+    return f"""
+fn hex_digit(v: u32) -> u8 {{
+    if v < 10 {{
+        return 48 + (v as u8)
+    }}
+    return 97 + ((v - 10) as u8)
+}}
+
+pub fn main(world: World) -> Void raises {{
+    var n: u32 = {n}
+    if n == 0 {{
+        check world.out.write("0\\n")
+        return
+    }}
+    var tmp: [16]u8 = [0; 16]
+    var cnt: usize = 0
+    while n > 0 {{
+        tmp[cnt] = hex_digit(n % 16)
+        n = n / 16
+        cnt = cnt + 1
+    }}
+    var out: [16]u8 = [0; 16]
+    var w: usize = 0
+    while w < cnt {{
+        out[w] = tmp[cnt - 1 - w]
+        w = w + 1
+    }}
+    check world.out.write(out[0..cnt])
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_caesar(text: str, shift: int) -> str:
+    return f"""
+pub fn main(world: World) -> Void raises {{
+    let s: Span<u8> = std.mem.span("{text}")
+    let n: usize = std.mem.len(s)
+    var out: [256]u8 = [0; 256]
+    var i: usize = 0
+    while i < n && i < 256 {{
+        let c: u8 = s[i]
+        if c >= 97 && c <= 122 {{
+            out[i] = 97 + ((c - 97 + {shift}) % 26)
+        }} else if c >= 65 && c <= 90 {{
+            out[i] = 65 + ((c - 65 + {shift}) % 26)
+        }} else {{
+            out[i] = c
+        }}
+        i = i + 1
+    }}
+    check world.out.write(out[0..n])
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_reverse_str(text: str) -> str:
+    return f"""
+pub fn main(world: World) -> Void raises {{
+    let s: Span<u8> = std.mem.span("{text}")
+    let n: usize = std.mem.len(s)
+    var out: [256]u8 = [0; 256]
+    var i: usize = 0
+    while i < n && i < 256 {{
+        out[i] = s[n - 1 - i]
+        i = i + 1
+    }}
+    check world.out.write(out[0..n])
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_count_vowels(text: str) -> str:
+    return common.FMT_U32 + f"""
+pub fn main(world: World) -> Void raises {{
+    let s: Span<u8> = std.mem.span("{text}")
+    let n: usize = std.mem.len(s)
+    var i: usize = 0
+    var v: u32 = 0
+    while i < n {{
+        let c: u8 = s[i]
+        if c == 97 || c == 101 || c == 105 || c == 111 || c == 117 {{
+            v = v + 1
+        }}
+        i = i + 1
+    }}
+    var buf: [10]u8 = [0; 10]
+    check world.out.write(fmt_u32(buf, v))
+    check world.out.write("\\n")
+}}
+"""
+
+
+def b_repeat_char(ch: str, n: int) -> str:
+    return f"""
+pub fn main(world: World) -> Void raises {{
+    var i: u32 = 0
+    while i < {n} {{
+        check world.out.write("{ch}")
+        i = i + 1
+    }}
+    check world.out.write("\\n")
+}}
+"""
+
+
 # ---- task specs: (slug, title, difficulty, tags, prompt, source, extra_patterns) ----
 
 def specs():
@@ -394,6 +611,61 @@ def specs():
         add(f"even-count-{n}", f"Count evens up to {n}", 1, ["loop", "branch"],
             f"Write a Zero program that prints how many even numbers are in the range 1..{n} inclusive, followed by a newline.",
             b_even_count(n))
+
+    for n in [2, 17, 99, 144]:
+        add(f"isqrt-{n}", f"Integer sqrt of {n}", 2, ["algorithm", "loop"],
+            f"Write a Zero program that prints the integer floor square root of {n} (largest r with r*r <= {n}), followed by a newline.",
+            b_isqrt(n))
+
+    for n in [5, 16, 255]:
+        add(f"to-binary-{n}", f"{n} in binary", 2, ["loop"],
+            f"Write a Zero program that prints {n} in base-2 (binary, no leading zeros), followed by a newline.",
+            b_to_binary(n))
+
+    for n in [7, 8, 255]:
+        add(f"popcount-{n}", f"Set bits in {n}", 2, ["loop"],
+            f"Write a Zero program that prints how many 1-bits are in the binary representation of {n}, followed by a newline.",
+            b_popcount(n))
+
+    for a, b in [(4, 6), (12, 18), (21, 6)]:
+        add(f"lcm-{a}-{b}", f"LCM of {a} and {b}", 2, ["algorithm"],
+            f"Write a Zero program that prints the least common multiple of {a} and {b}, followed by a newline.",
+            b_lcm(a, b))
+
+    for n in [5, 10, 100]:
+        add(f"triangle-num-{n}", f"Triangular number T({n})", 1, ["arithmetic"],
+            f"Write a Zero program that prints the {n}th triangular number (0+1+...+{n}), followed by a newline.",
+            b_triangle_num(n))
+
+    for c in [0, 37, 100]:
+        add(f"c2f-{c}", f"{c}C to Fahrenheit", 1, ["arithmetic"],
+            f"Write a Zero program that converts {c} degrees Celsius to Fahrenheit using F = C*9/5 + 32 (integer math) and prints the result with a newline.",
+            b_celsius_to_f(c))
+
+    for n in [255, 16, 4095]:
+        add(f"hex-{n}", f"{n} in hex", 2, ["loop"],
+            f"Write a Zero program that prints {n} in lowercase hexadecimal (no leading zeros), followed by a newline.",
+            b_hex(n))
+
+    for text, sh in [("abc", 3), ("xyz", 3), ("Hello", 1)]:
+        add(f"caesar-{text}-{sh}", f"Caesar shift {text} by {sh}", 2, ["string", "loop"],
+            f"Write a Zero program that prints the text `{text}` with each ASCII letter Caesar-shifted forward by {sh} (wrapping within its case, non-letters unchanged), followed by a newline.",
+            b_caesar(text, sh))
+
+    for text in ["hello", "zero", "abcd"]:
+        add(f"reverse-str-{text}", f"Reverse '{text}'", 1, ["string", "loop"],
+            f"Write a Zero program that prints the characters of `{text}` in reverse order, followed by a newline.",
+            b_reverse_str(text))
+
+    for text in ["education", "rhythm", "aeiou"]:
+        add(f"vowels-{text}", f"Vowels in '{text}'", 2, ["string", "loop"],
+            f"Write a Zero program that prints how many lowercase vowels (a, e, i, o, u) are in `{text}`, followed by a newline.",
+            b_count_vowels(text))
+
+    for ch, n in [("*", 5), ("x", 3), ("=", 8)]:
+        add(f"repeat-{ch}-{n}", f"Repeat '{ch}' {n} times", 1, ["loop"],
+            f"Write a Zero program that prints the character `{ch}` exactly {n} times on one line, followed by a newline.",
+            b_repeat_char(ch, n))
 
     return out
 

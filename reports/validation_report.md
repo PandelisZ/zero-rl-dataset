@@ -1,4 +1,9 @@
-# Validation Report — Zero RL dataset v0.1
+# Validation Report — Zero RL dataset v0.2 (231 tasks)
+
+> v0.2 (231 tasks) results: CIR schema **231 rows valid**; oracle mean reward
+> **1.0** (0 failures), baseline mean **0.4285**, **0 trivial** tasks. Method
+> below is unchanged from v0.1.
+
 
 All checks below were executed locally against `zero 0.2.0`.
 
