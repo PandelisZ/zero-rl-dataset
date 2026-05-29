@@ -100,7 +100,7 @@ Two execution paths (`harness=`):
 
 - **`deterministic`** (default) — single-turn, model emits Zero source, scored
   locally by `zero check/run/test`. No sandbox; fully verified offline.
-- **`roder-zero`** — agentic: the [Roder](https://dl.roder.sh) coding agent edits
+- **`roder-zero`** — agentic: the [Roder](https://roder.sh) coding agent edits
   the zerolang project inside a Prime sandbox that has **both `zero` and `roder`**
   installed, scored by `sandbox/score.sh` → `/logs/verifier/reward.json`.
 
