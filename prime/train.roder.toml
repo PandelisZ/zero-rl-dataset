@@ -1,0 +1,53 @@
+# Sandboxed agentic RL: Roder edits zerolang projects inside a sandbox that has
+# both `zero` and `roder` installed; reward comes from the in-sandbox scorer
+# (score.sh -> reward.json) running `zero check/test/run`.
+#
+# Requires: linux/amd64 Prime sandbox + the zero-roder-sandbox image
+# (build: docker build --platform=linux/amd64 -t zero-roder-sandbox envs/zero_verifiers_env/sandbox).
+# Run: prime rl run prime/train.roder.toml   (validate first with prime eval run)
+model = "poolside/Laguna-XS.2"
+
+[run]
+name = "laguna-xs2-zero-roder-sandbox-rl"
+seed = 42
+
+[[env]]
+id = "zero_package_edit"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.6
+
+[env.env_args]
+harness = "roder-zero"
+docker_image = "zero-roder-sandbox:latest"
+roder_soft_timeout_sec = 900
+
+[[env]]
+id = "zero_repair"
+package = "../envs/zero_verifiers_env"
+split = "train"
+weight = 0.4
+
+[env.env_args]
+harness = "roder-zero"
+docker_image = "zero-roder-sandbox:latest"
+
+[training]
+algorithm = "grpo"
+steps = 300
+batch_size = 128
+rollouts_per_example = 8
+max_prompt_tokens = 16384
+max_completion_tokens = 8192
+
+[eval]
+every_steps = 50
+split = "val"
+rollouts_per_example = 4
+
+[checkpoint]
+every_steps = 50
+keep_last = 5
+
+[logging]
+wandb_project = "zero-rl"

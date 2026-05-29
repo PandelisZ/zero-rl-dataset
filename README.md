@@ -62,10 +62,13 @@ zero-rl-dataset/
     graders/       zero_grader.py, zero_runner.py, zero_reward.py
     validators/    validate_cir.py, oracle_validate.py, compute_hashes.py
     converters/    (deferred TerminalBench/Harbor converters — see README)
-  envs/zero_verifiers_env/                 # Prime `verifiers` environment package
+  envs/zero_verifiers_env/                 # Prime `verifiers` environment package (self-contained)
     zero_verifiers_env/{load_environment,taskset,harness,rewards}.py
+    zero_verifiers_env/{zero_grader,zero_runner,zero_reward}.py   # vendored grader
+    zero_verifiers_env/roder_zero.py       # Roder agent harness (CLIHarness)
+    sandbox/{install.sh,Dockerfile,score.sh}  # zero + roder sandbox image
     tasks/{zero_native,zero_repair,zero_package_edit,harbor}/
-  prime/           eval.zero.toml, train.zero.toml, train.mixed.toml
+  prime/           eval.zero.toml, train.zero.toml, train.mixed.toml, train.roder.toml
   reports/         conversion_report.md, validation_report.md, baseline_eval_report.md, oracle_results.json
 ```
 
@@ -86,9 +89,28 @@ workspace and shells out to `zero`. Reward shaping (v1) lives in `zero_reward.py
 
 Hard-zero on: no submission, timeout, or unextractable source.
 
-**Prime env** (`envs/zero_verifiers_env`) exposes `load_environment(family, split, ...)`,
+**Prime env** (`envs/zero_verifiers_env`) exposes `load_environment(family, split, harness=...)`,
 wrapping the grader in a `verifiers` rubric for the Zero families and delegating
-`harbor_env` to Prime's `HarborTaskset`. The host must have `zero` on PATH.
+`harbor_env` to Prime's `HarborTaskset`. The host must have `zero` on PATH. The
+grader is **vendored** into the package so it installs standalone on the Hub.
+
+## Sandbox + Roder harness
+
+Two execution paths (`harness=`):
+
+- **`deterministic`** (default) — single-turn, model emits Zero source, scored
+  locally by `zero check/run/test`. No sandbox; fully verified offline.
+- **`roder-zero`** — agentic: the [Roder](https://dl.roder.sh) coding agent edits
+  the zerolang project inside a Prime sandbox that has **both `zero` and `roder`**
+  installed, scored by `sandbox/score.sh` → `/logs/verifier/reward.json`.
+
+The sandbox is defined in `envs/zero_verifiers_env/sandbox/`:
+`install.sh` (zerolang.ai + dl.roder.sh), `Dockerfile` (amd64 image
+`zero-roder-sandbox`), and `score.sh` (Harbor reward contract). The harness
+(`roder_zero.py`) is adapted from graphlanger's proven `harbor_terminal_bench`
+roder-zero, extended to install `zero`. Roder's binary is linux/amd64 only, so
+this path is validated on Prime, not on this host. Train with
+`prime/train.roder.toml`.
 
 ## Reproducibility
 
