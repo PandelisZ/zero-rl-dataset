@@ -1,3 +1,28 @@
+# Baseline Eval Report — Zero RL dataset v0.3
+
+## zero_graph_edit (the graph-native target) — Laguna XS.2, online ✅
+
+Env v0.4.0, ToolEnv over the Roder-aligned zero-coder tools, val split:
+
+| metric | value |
+|---|---:|
+| reward | 0.195 |
+| graph_patch_success (w 0.50) | **0.000** |
+| target_source_match (w 0.20) | 0.000 |
+| zero_check_pass (w 0.15) | 0.667 |
+| graph_surface_used (w 0.15) | 0.633 |
+| tool calls/rollout | graph_dump 1.27, zerolang_edit 0.93, check 0.93, roundtrip 0.83 |
+
+Eval: https://app.primeintellect.ai/dashboard/evaluations/fhradr26zl343gg8ti3elimx
+
+Read: Laguna **uses the ProgramGraph edit surface** (surface_used 0.63, edit
+called ~1×/rollout) but **cannot yet land a correct checked patch on the target**
+(success 0.0). The reward is participation-only credit. This is the intended RL
+target — the 0.50-weight success term is wide open, and the rubric is sound (a
+gold trajectory scores 1.0 offline). Train with `prime/train.graph.toml`.
+
+---
+
 # Baseline Eval Report — Zero RL dataset v0.2
 
 ## v0.2 (231 tasks) — Laguna XS.2 baselines, online ✅

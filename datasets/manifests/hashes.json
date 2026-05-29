@@ -1,11 +1,11 @@
 {
-  "file_count": 62,
+  "file_count": 63,
   "files": {
     "datasets/cir/tasks.test.jsonl": "09793494bd7593fb0cda4b0b32da62695c90b43c6ff587008c815c1d42d966c9",
     "datasets/cir/tasks.train.jsonl": "5798ae93ad8da1d2a0fa851fd9f05b4dcf41260bf9a8ff1f0132cc399326b0e2",
     "datasets/cir/tasks.val.jsonl": "cfb38bc3390356aa0cc790f27239981e7aee57c6db3c1a18950db36e38cac126",
     "datasets/manifests/dataset_manifest.json": "47a46a5b540d7b2a5aae032728953effc7ce4ef8d57ade36c7e4830142e9bc71",
-    "datasets/manifests/hashes.json": "57812eae8e06ce426c0de4c3df575ec5447b9d21a5044aa6ca750f5cd77203a0",
+    "datasets/manifests/hashes.json": "218c31283c3f29a255f48b769d41f4f66ab2081edcde97839e2498fc3b17519c",
     "datasets/manifests/source_manifest.json": "f702ce16b7cd1568ad71c9a83f619a045a4a61e9654ce68c1afcb714c8b80a79",
     "datasets/zero_graph_edit/graph_edit.test.jsonl": "2452e00e1dedda4eab6a74c64d500ae93bed448b50a032ed7116def8de3e09f7",
     "datasets/zero_graph_edit/graph_edit.train.jsonl": "2009d49453f1d80edc890e977878b2b81a9810f0bbb5d347df758b1513f10165",
@@ -44,6 +44,7 @@
     "envs/zero_verifiers_env/zero_verifiers_env/zero_runner.py": "cb823c89bf871328b37fb1ef4af0274b7f25823603f8a6cdae370f9c233d2d98",
     "envs/zero_verifiers_env/zero_verifiers_env/zero_tools.py": "89432d36747bccfc8cbb0e6f754735d1ddc4debf1055bc777f5c9c73694894e2",
     "prime/eval.zero.toml": "6aa28c5fd5852cfe65017649a1ffa6bc0944387c49ffcf0117b7ec4cb964a5ea",
+    "prime/train.graph.toml": "99067feb6e64d21a75061550629d5f8503053e73f07f613ce49e7076d8a09029",
     "prime/train.mixed.toml": "0a6f80839117e6d65108f38f4f23a306dd6c4318b2486f8b9aeb98b700c0f931",
     "prime/train.roder.toml": "3e98f5fee7d61356d61a16dc727ba3cd07d9a60b07b2dbbdc47c73f0751ead04",
     "prime/train.smoke.toml": "a5c261b29154809ec31133c18b44106e37da806dc2f0ce459dea2c56af3849bb",
