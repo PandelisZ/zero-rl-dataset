@@ -1,13 +1,41 @@
 # Baseline Eval Report — Zero RL dataset v0.1
 
-## Status: model baseline NOT run (out of local scope)
+## Live Prime Intellect eval — DONE ✅
 
-Running `poolside/Laguna-XS.2` (33B) requires Prime Intellect hosted infra
-(GPUs + account). The config to produce it is ready:
+The environment is deployed and proven online on Prime Intellect:
+
+- Env (PUBLIC): `pandelis/zero-verifiers-env`
+  https://app.primeintellect.ai/dashboard/environments/pandelis/zero-verifiers-env
+- Eval run (`zero_native` val, gpt-4.1-mini, 5 examples × 3 rollouts = 15 samples):
+  https://app.primeintellect.ai/dashboard/evaluations/z8k3jf1l8vj64wlpt0dyfjxm
+  status COMPLETED, **avg_score 0.060**, framework `verifiers`.
+
+Command:
+```
+prime env push zero_verifiers_env -p ./envs --visibility PUBLIC
+prime eval run pandelis/zero-verifiers-env -p openai -m gpt-4.1-mini -n 5 -t 2048 -T 0.2 \
+  -a '{"family":"zero_native","split":"val"}' -s
+```
+
+This proves the full pipeline end-to-end on the platform: env installs from the
+Hub (self-contained, bundled CIR data), runs rollouts against a real model,
+grades each completion with the native `zero` toolchain, and uploads results.
+
+The **0.06** mean is the expected honest baseline: `gpt-4.1-mini` does not know
+zerolang 0.2.0, so it earns mostly format/pattern credit and rarely compiles —
+exactly the headroom RL targets (oracle = 1.0, verified). It also confirms the
+grader discriminates on the platform, not just locally.
+
+## Laguna XS.2 baseline — pending credentials
+
+Running the target `poolside/Laguna-XS.2` (33B) needs a Prime inference endpoint
++ `PRIME_API_KEY` (unset here). Once set, swap the model:
 
 ```
-prime eval run prime/eval.zero.toml
+prime eval run pandelis/zero-verifiers-env -p prime -m poolside/laguna-xs.2 \
+  -n 5 -a '{"family":"zero_native","split":"val"}' -s
 ```
+or use the provided `prime/eval.zero.toml`.
 
 ## Local proxy baseline (grader-side)
 

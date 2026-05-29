@@ -11,7 +11,11 @@ import json
 import os
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_DATASET_ROOT = os.path.abspath(os.path.join(_HERE, "..", "..", "..", "datasets", "cir"))
+# Prefer the CIR data bundled inside the package (self-contained for Hub
+# install); fall back to the repo's datasets/cir for local dev.
+_BUNDLED = os.path.join(_HERE, "data", "cir")
+_REPO = os.path.abspath(os.path.join(_HERE, "..", "..", "..", "datasets", "cir"))
+DEFAULT_DATASET_ROOT = _BUNDLED if os.path.isdir(_BUNDLED) else _REPO
 
 
 def load_cir(split: str, dataset_root: str | None = None) -> list[dict]:
@@ -35,7 +39,7 @@ def to_dataset_records(rows: list[dict]) -> list[dict]:
     for r in rows:
         info = {k: v for k, v in r.items() if k != "_fixture"}
         records.append({
-            "prompt": r["prompt"],
+            "question": r["prompt"],  # SingleTurnEnv combines this with system_prompt
             "answer": "",  # graded by execution, not string match
             "info": info,
             "task": r["family"],

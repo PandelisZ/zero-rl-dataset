@@ -9,10 +9,11 @@ dependencies = [
 ]
 
 [project.entry-points."verifiers.environments"]
-zero_native = "zero_verifiers_env:load_environment"
-zero_repair = "zero_verifiers_env:load_environment"
-zero_package_edit = "zero_verifiers_env:load_environment"
-harbor_env = "zero_verifiers_env:load_environment"
+zero_verifiers_env = "zero_verifiers_env:load_environment"
+zero_native = "zero_verifiers_env:load_zero_native"
+zero_repair = "zero_verifiers_env:load_zero_repair"
+zero_package_edit = "zero_verifiers_env:load_zero_package_edit"
+harbor_env = "zero_verifiers_env:load_harbor_env"
 
 [build-system]
 requires = ["hatchling"]
@@ -20,6 +21,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["zero_verifiers_env"]
+artifacts = ["zero_verifiers_env/data/**/*.jsonl"]
 
 # NOTE: this environment shells out to the `zero` binary (zerolang 0.2.0) at
 # grade time. The training/eval host must have `zero` on PATH
