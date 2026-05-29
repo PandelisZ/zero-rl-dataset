@@ -2,24 +2,31 @@
 
 ## zero_graph_edit (the graph-native target) — Laguna XS.2, online ✅
 
-Env v0.4.0, ToolEnv over the Roder-aligned zero-coder tools, val split:
+ToolEnv over the Roder-aligned zero-coder tools, val split:
 
-| metric | value |
-|---|---:|
-| reward | 0.195 |
-| graph_patch_success (w 0.50) | **0.000** |
-| target_source_match (w 0.20) | 0.000 |
-| zero_check_pass (w 0.15) | 0.667 |
-| graph_surface_used (w 0.15) | 0.633 |
-| tool calls/rollout | graph_dump 1.27, zerolang_edit 0.93, check 0.93, roundtrip 0.83 |
+| metric (weight) | v0.4.0 (180 tasks) | v0.4.1 (199, +official examples) |
+|---|---:|---:|
+| reward | 0.195 | **0.296** |
+| graph_patch_success (0.50) | 0.000 | **0.000** |
+| target_source_match (0.20) | 0.000 | 0.417 |
+| zero_check_pass (0.15) | 0.667 | 0.861 |
+| graph_surface_used (0.15) | 0.633 | 0.556 |
+| zerolang_edit calls/rollout | 0.93 | 0.94 |
 
-Eval: https://app.primeintellect.ai/dashboard/evaluations/fhradr26zl343gg8ti3elimx
+Evals: v0.4.0 https://app.primeintellect.ai/dashboard/evaluations/fhradr26zl343gg8ti3elimx
+· v0.4.1 https://app.primeintellect.ai/dashboard/evaluations/l4ejk1j0mz74zwbec9n0oug0
 
-Read: Laguna **uses the ProgramGraph edit surface** (surface_used 0.63, edit
-called ~1×/rollout) but **cannot yet land a correct checked patch on the target**
-(success 0.0). The reward is participation-only credit. This is the intended RL
-target — the 0.50-weight success term is wide open, and the rubric is sound (a
-gold trajectory scores 1.0 offline). Train with `prime/train.graph.toml`.
+Read: Laguna **uses the ProgramGraph edit surface** (surface_used ~0.6, calls
+`zerolang_edit` ~1×/rollout) and now often **reaches the right target program**
+(target_source_match 0.42 on the richer set) — but **`graph_patch_success`
+stays 0.0**: it gets there by writing source text in its final answer, not by
+landing a correct checked patch. That gap (the 0.50-weight term) is exactly the
+RL target. Rubric is sound — a gold trajectory scores 1.0 offline. Train with
+`prime/train.graph.toml`.
+
+The 199 graph-edit tasks include 19 built from the official zerolang examples
+(Point types, enum/choice/`match`, generics, `owned`, `meta`) — graph edits on
+realistic programs, not just toy printers.
 
 ---
 
