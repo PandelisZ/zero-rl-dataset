@@ -129,8 +129,15 @@ def main():
         if not dump:
             continue
         ghash = dump.get("graphHash")
-        literals = [n for n in dump.get("nodes", [])
+        all_lits = [n for n in dump.get("nodes", [])
                     if n.get("kind") == "Literal" and str(n.get("value", "")) != ""]
+        # Only edit literals whose value is UNIQUE in the program, so the goal
+        # ("change the literal whose value is X") identifies exactly one node and
+        # a correct checked patch reaches the gold target. Ambiguous values
+        # (e.g. 0/1 appearing many times) make the task unsolvable-as-graded.
+        from collections import Counter
+        val_counts = Counter(str(n.get("value")) for n in all_lits)
+        literals = [n for n in all_lits if val_counts[str(n.get("value"))] == 1]
         made = 0
         for n in literals:
             if made >= 2:

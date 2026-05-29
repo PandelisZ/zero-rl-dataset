@@ -192,7 +192,10 @@ def zerolang_edit(source: str, graphHash: str, operations: list, validate: bool 
 
     ws = zero_runner.materialize({"main.0": source})
     try:
-        argv = ["graph", "patch", "--json", "main.0", *op_args]
+        # Enforce the stale-graph precondition (true "checked" edit, like Roder /
+        # `zero graph patch --expect-graph-hash`). Rejects edits against a graph
+        # hash the agent did not actually inspect.
+        argv = ["graph", "patch", "--json", "main.0", "--expect-graph-hash", graphHash, *op_args]
         try:
             proc = subprocess.run(
                 [zero_runner.zero_bin(), *argv], cwd=ws,

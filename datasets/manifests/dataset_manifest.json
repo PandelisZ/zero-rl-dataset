@@ -3,18 +3,18 @@
     "zero_native": 92,
     "zero_repair": 92,
     "zero_package_edit": 47,
-    "zero_graph_edit": 199
+    "zero_graph_edit": 189
   },
   "splits": {
-    "train": 347,
-    "val": 42,
-    "test": 41
+    "train": 339,
+    "val": 41,
+    "test": 40
   },
   "difficulty": {
     "1": 35,
     "2": 87,
-    "3": 303,
+    "3": 293,
     "4": 5
   },
-  "total": 430
+  "total": 420
 }
