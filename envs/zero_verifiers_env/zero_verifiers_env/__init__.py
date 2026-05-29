@@ -30,4 +30,4 @@ __all__ = [
     "load_zero_package_edit",
     "load_harbor_env",
 ]
-__version__ = "0.1.0"
+__version__ = "0.2.0"

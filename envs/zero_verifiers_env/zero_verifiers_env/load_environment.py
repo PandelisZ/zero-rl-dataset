@@ -21,10 +21,39 @@ from . import rewards, taskset
 
 ZERO_FAMILIES = {"zero_native", "zero_repair", "zero_package_edit"}
 
+# Single-turn (deterministic) prompt: emit source directly.
 SYSTEM_PROMPT = (
     "You are an expert Zero (zerolang) programmer. Zero uses `.0` source files, "
-    "typed functions, `let`/`var`, `while`, `if`/`else`, and capability passing "
-    "via `World`. Respond with Zero source only."
+    "typed functions (`fn`/`pub fn`), `let`/`var`, `while`, `if`/`else`, `match`, "
+    "and capability passing via `World` (e.g. `check world.out.write(...)` in a "
+    "function marked `raises`). Respond with ONLY the Zero source — no prose, no "
+    "code fences unless asked."
+)
+
+# Tool-using prompt, aligned with Roder's zero-coder checked graph-edit loop and
+# the exact tool surface from roder-ext-zerolang.
+ZERO_CODER_SYSTEM_PROMPT = (
+    "You are a Zero (zerolang) coding agent with first-party, checked graph-edit "
+    "tools that shell out to the local `zero` compiler. Prefer checked "
+    "ProgramGraph edits over rewriting source text.\n\n"
+    "Tools:\n"
+    "- zerolang_skills_get(skill, full): read version-matched Zero docs "
+    "(language, graph, diagnostics, stdlib, agent). Use it first when syntax or "
+    "workflow is unclear.\n"
+    "- zerolang_check(source): run `zero check --json`; read diagnostics.\n"
+    "- zerolang_graph_dump(source): get the ProgramGraph — `graphHash` and node "
+    "ids/values you patch against.\n"
+    "- zerolang_graph_view(source): render canonical source from a graph/source.\n"
+    "- zerolang_fix_plan(source): get Zero's typed repair plan.\n"
+    "- zerolang_edit(source, graphHash, operations): apply CHECKED edits. Each "
+    "operation is {op: set|rename|insert|insertEdge|replace|delete, ...} with "
+    "node/field/expect/value preconditions; edits are rejected if the graphHash "
+    "or `expect` value does not match.\n"
+    "- zerolang_graph_roundtrip(source): verify graph/source semantic stability.\n\n"
+    "Checked edit loop: inspect with zerolang_graph_dump to get the current "
+    "graphHash and target node id, apply zerolang_edit with that graphHash and an "
+    "`expect` precondition, then zerolang_check the result. When the task is done, "
+    "reply with the final Zero source for `main.0` inside a ```zero code block."
 )
 
 
@@ -78,8 +107,21 @@ def load_environment(
     if max_examples:
         records = records[:max_examples]
     dataset = Dataset.from_list(records)
-
     rubric = vf.Rubric(funcs=[_zero_reward_func], weights=[1.0])
+
+    if harness == "tools":
+        # Tool-using env with Roder's zero-coder tool surface (local `zero`).
+        from .zero_tools import ZERO_CODER_TOOLS
+        max_turns = int(kwargs.pop("max_turns", 6))
+        return vf.ToolEnv(
+            dataset=dataset,
+            tools=ZERO_CODER_TOOLS,
+            system_prompt=ZERO_CODER_SYSTEM_PROMPT,
+            rubric=rubric,
+            max_turns=max_turns,
+            **kwargs,
+        )
+
     return vf.SingleTurnEnv(
         dataset=dataset,
         system_prompt=SYSTEM_PROMPT,

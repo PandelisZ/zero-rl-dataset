@@ -14,10 +14,27 @@ host/sandbox must have zerolang installed (`curl -fsSL https://zerolang.ai/insta
 
 `load_environment(..., harness=...)`:
 
-| harness | execution | sandbox | verified locally |
+| harness | execution | sandbox | verified |
 |---|---|---|---|
-| `deterministic` (default) | single-turn: model emits Zero source → graded by `zero check/run/test` | no | ✅ yes |
-| `roder-zero` | agentic: the **Roder** agent edits the project in a sandbox; scored by `score.sh` → `reward.json` | yes (linux/amd64) | ⚠️ needs Prime + amd64 |
+| `deterministic` (default) | single-turn: model emits Zero source → graded by `zero check/run/test` | no | ✅ local + online |
+| `tools` | multi-turn tool use with the **Roder zero-coder tool surface** (local `zero`); final source graded | no | ✅ local + online |
+| `roder-zero` | agentic: the **Roder** agent binary edits the project in a sandbox; scored by `score.sh` → `reward.json` | yes (linux/amd64) | ⚠️ needs Prime + amd64 |
+
+### Zero-coder tools (`harness="tools"`)
+
+Mirrors `roder-ext-zerolang` exactly (same names/semantics, backed by local
+`zero`), so a policy trained here transfers to the Roder harness:
+
+`zerolang_skills_get`, `zerolang_check`, `zerolang_graph_dump`,
+`zerolang_graph_view`, `zerolang_fix_plan`, `zerolang_edit` (checked
+ProgramGraph patch via graphHash + node/`expect`/`value` operations),
+`zerolang_graph_roundtrip`. The system prompt teaches Roder's checked edit loop
+(dump → edit with `expect` precondition → check). Adaptation: tool `input` is
+source TEXT (stateless) rather than a workspace path.
+
+Online proof (gpt-4.1-mini, zero_repair val): the model issued 4.2 tool
+calls/rollout (graph_dump 1.9, edit 1.7) — see eval
+`zjlz90huing3mbb604pubmbs`.
 
 ### Families
 `zero_native`, `zero_repair`, `zero_package_edit` (graded by the Zero toolchain),
@@ -51,7 +68,8 @@ with an API-intercepted config (`OPENAI_BASE_URL`). Roder is amd64-only.
 | `family` | `zero_native` | task family / env id |
 | `split` | `train` | `train`/`val`/`test` |
 | `max_examples` | `None` | cap for smoke runs |
-| `harness` | `deterministic` | or `roder-zero` |
+| `harness` | `deterministic` | or `tools` (zero-coder tools) or `roder-zero` |
+| `max_turns` | `6` | `tools` harness only |
 | `dataset_root` | repo `datasets/cir` | CIR location |
 | `docker_image` | `zero-roder-sandbox:latest` | roder-zero only |
 | `roder_binary_url` / `roder_config_url` | `dl.roder.sh` defaults | roder-zero only |
